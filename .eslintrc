@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "jest"],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+  "rules": {
+    "no-unused-vars": "warn",
+    "func-names": "off",
+    "no-process-exit": "off",
+    "no-param-reassign": "off",
+    "object-shorthand": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off",
+    "no-restricted-syntax": "off",
+    "guard-for-in": "off",
+    "global-require": "off",
+    "no-nested-ternary": "off",
+    "prefer-promise-reject-errors": "off"
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest/globals": true
+  }
+}
