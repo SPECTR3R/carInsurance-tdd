@@ -1,0 +1,7 @@
+{
+  "name": "car-insurance-tdd",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Armando del Río <adrio.coder@gmail.com>",
+  "license": "MIT"
+}
