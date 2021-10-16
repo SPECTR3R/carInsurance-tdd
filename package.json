@@ -7,13 +7,14 @@
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/index.js",
-    "test": "--coverage",
+    "test": "jest --coverage",
+    "test:pre":"jest",
     "test:dev": "jest --watchAll",
     "lint": "eslint . --ext .ts && prettier --config .prettierrc 'src/**/*.ts' --write"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test && npm run && npm run lint"
+      "pre-commit": "npm run test:pre && npm run lint"
     }
   },
   "devDependencies": {
