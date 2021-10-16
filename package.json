@@ -11,6 +11,11 @@
     "test:dev": "jest --watchAll",
     "lint": "eslint . --ext .ts && prettier --config .prettierrc 'src/**/*.ts' --write"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run && npm run lint"
+    }
+  },
   "devDependencies": {
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.0",
