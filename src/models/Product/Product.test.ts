@@ -1,12 +1,12 @@
 import { Product } from './Product'
 
-describe('Palindrome checker', () => {
+describe('Product Class', () => {
   let product: Product
   beforeEach(() => {
-    product = new Product()
+    product = new Product('test', 1, 1)
   })
 
-  it('exists', () => {
+  it('Creates an instance of Product', () => {
     expect(product).toBeDefined()
   })
 })
