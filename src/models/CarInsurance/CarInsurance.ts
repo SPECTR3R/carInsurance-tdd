@@ -20,7 +20,6 @@ export class CarInsurance {
       if (price !== 80 && name === 'Mega Coverage') throw new Error('The price "Mega Coverage" product should be 80.')
     })
   }
-
   private updateFullCoverageProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
     if (newPrice > 49) newPrice = 50
@@ -28,7 +27,6 @@ export class CarInsurance {
     const newSellIn = sellIn - 1
     return { name, sellIn: newSellIn, price: newPrice }
   }
-
   private updateSpecialFullCoverageProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
     if (price > 49) newPrice = 50
@@ -39,7 +37,6 @@ export class CarInsurance {
     const newSellIn = sellIn - 1
     return { name, sellIn: newSellIn, price: newPrice }
   }
-
   private updateSuperSaleProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
     if (newPrice > 49) newPrice = 50
