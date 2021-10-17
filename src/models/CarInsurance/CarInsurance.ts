@@ -2,6 +2,11 @@ import { Product } from '../'
 type ProductsArr = Array<Product>
 
 export class CarInsurance {
+  constructor(productsArr: ProductsArr) {
+    this.validateInputArr(productsArr)
+    this.products = productsArr
+  }
+
   products: ProductsArr
 
   private portfolio: string[] = ['Medium Coverage', 'Full Coverage', 'Low Coverage', 'Mega Coverage', 'Special Full Coverage', 'Super Sale']
@@ -23,9 +28,9 @@ export class CarInsurance {
     const newSellIn = sellIn - 1
     return { name, sellIn: newSellIn, price: newPrice }
   }
+
   private updateSpecialFullCoverageProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
-
     if (price > 49) newPrice = 50
     else if (sellIn < 1) newPrice = 0
     else if (sellIn <= 5) newPrice = price + 3
@@ -35,9 +40,17 @@ export class CarInsurance {
     return { name, sellIn: newSellIn, price: newPrice }
   }
 
-  constructor(productsArr: ProductsArr) {
-    this.validateInputArr(productsArr)
-    this.products = productsArr
+  private updateSuperSaleProduct({ name, sellIn, price }: Product): Product {
+    let newPrice = price
+    if (newPrice > 49) newPrice = 50
+    newPrice = price >= 2 ? price - 2 : 0
+    return { name, sellIn: sellIn - 1, price: newPrice }
+  }
+  private updateNormalProduct({ name, sellIn, price }: Product): Product {
+    let newPrice = price
+    if (newPrice > 49) newPrice = 50
+    newPrice = price >= 1 ? price - 1 : 0
+    return { name, sellIn: sellIn - 1, price: newPrice }
   }
 
   updatePrice(): void {
@@ -50,8 +63,10 @@ export class CarInsurance {
             return this.updateFullCoverageProduct({ name, sellIn, price })
           case 'Special Full Coverage':
             return this.updateSpecialFullCoverageProduct({ name, sellIn, price })
+          case 'Super Sale':
+            return this.updateSuperSaleProduct({ name, sellIn, price })
           default:
-            throw new Error('Invalid product name')
+            return this.updateNormalProduct({ name, sellIn, price })
         }
       }
     )

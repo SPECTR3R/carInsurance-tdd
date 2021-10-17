@@ -73,4 +73,22 @@ describe('CarInsurance class', () => {
     expect(carInsurance.products[2].sellIn).toEqual(2)
     expect(carInsurance.products[2].price).toEqual(48)
   })
+
+  it('The price of "Super Sale" degrade in price twice as fast as normal Products.', () => {
+    const carInsurance = new CarInsurance([new Product('Super Sale', 15, 20), new Product('Super Sale', 2, 1)])
+    carInsurance.updatePrice()
+    expect(carInsurance.products[0].sellIn).toEqual(14)
+    expect(carInsurance.products[0].price).toEqual(18)
+    expect(carInsurance.products[1].sellIn).toEqual(1)
+    expect(carInsurance.products[1].price).toEqual(0)
+  })
+
+  it('The price of normal products should degrade by one the older they get until they reach 0.', () => {
+    const carInsurance = new CarInsurance([new Product('Medium Coverage', 15, 20), new Product('Low Coverage', 2, 0)])
+    carInsurance.updatePrice()
+    expect(carInsurance.products[0].sellIn).toEqual(14)
+    expect(carInsurance.products[0].price).toEqual(19)
+    expect(carInsurance.products[1].sellIn).toEqual(1)
+    expect(carInsurance.products[1].price).toEqual(0)
+  })
 })
