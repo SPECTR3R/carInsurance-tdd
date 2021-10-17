@@ -1,13 +1,6 @@
 import { Product } from '../'
 type ProductsArr = Array<Product>
 
-function updateFullCoverageProduct({ name, sellIn, price }: Product): Product {
-  let newPrice = price
-  if (newPrice > 49) newPrice = 50
-  newPrice = sellIn <= 0 ? price + 2 : price + 1
-  const newSellIn = sellIn - 1
-  return { name, sellIn: newSellIn, price: newPrice }
-}
 export class CarInsurance {
   products: ProductsArr
 
@@ -23,6 +16,25 @@ export class CarInsurance {
     })
   }
 
+  private updateFullCoverageProduct({ name, sellIn, price }: Product): Product {
+    let newPrice = price
+    if (newPrice > 49) newPrice = 50
+    newPrice = sellIn <= 0 ? price + 2 : price + 1
+    const newSellIn = sellIn - 1
+    return { name, sellIn: newSellIn, price: newPrice }
+  }
+  private updateSpecialFullCoverageProduct({ name, sellIn, price }: Product): Product {
+    let newPrice = price
+
+    if (price > 49) newPrice = 50
+    else if (sellIn < 1) newPrice = 0
+    else if (sellIn <= 5) newPrice = price + 3
+    else if (sellIn <= 10) newPrice = price + 2
+    else newPrice = price + 1
+    const newSellIn = sellIn - 1
+    return { name, sellIn: newSellIn, price: newPrice }
+  }
+
   constructor(productsArr: ProductsArr) {
     this.validateInputArr(productsArr)
     this.products = productsArr
@@ -34,10 +46,10 @@ export class CarInsurance {
         switch (name) {
           case 'Mega Coverage':
             return { name, sellIn, price }
-          case 'Full Coverage': {
-            const updatedFullCoverageProduct = updateFullCoverageProduct({ name, sellIn, price })
-            return updatedFullCoverageProduct
-          }
+          case 'Full Coverage':
+            return this.updateFullCoverageProduct({ name, sellIn, price })
+          case 'Special Full Coverage':
+            return this.updateSpecialFullCoverageProduct({ name, sellIn, price })
           default:
             throw new Error('Invalid product name')
         }
