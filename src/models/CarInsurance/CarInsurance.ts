@@ -1,5 +1,13 @@
 import { Product } from '../'
 type ProductsArr = Array<Product>
+
+function updateFullCoverageProduct({ name, sellIn, price }: Product): Product {
+  let newPrice = price
+  if (newPrice > 49) newPrice = 50
+  newPrice = sellIn <= 0 ? price + 2 : price + 1
+  const newSellIn = sellIn - 1
+  return { name, sellIn: newSellIn, price: newPrice }
+}
 export class CarInsurance {
   products: ProductsArr
 
@@ -20,12 +28,16 @@ export class CarInsurance {
     this.products = productsArr
   }
 
-  updatePrice(): ProductsArr {
-    return this.products.map(
+  updatePrice(): void {
+    this.products = this.products.map(
       ({ name, sellIn, price }): Product => {
         switch (name) {
           case 'Mega Coverage':
             return { name, sellIn, price }
+          case 'Full Coverage': {
+            const updatedFullCoverageProduct = updateFullCoverageProduct({ name, sellIn, price })
+            return updatedFullCoverageProduct
+          }
           default:
             throw new Error('Invalid product name')
         }
