@@ -17,7 +17,7 @@ This project uses the following technologies.
 
 ## Avalable scripts
 
-- Code coverage: log the code coverage to the console
+  - Code coverage: log the code coverage to the console
   ```
   yarn test
   ```
