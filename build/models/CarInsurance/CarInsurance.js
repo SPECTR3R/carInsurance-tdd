@@ -24,18 +24,14 @@ var CarInsurance = /** @class */ (function () {
     CarInsurance.prototype.updateFullCoverageProduct = function (_a) {
         var name = _a.name, sellIn = _a.sellIn, price = _a.price;
         var newPrice = price;
-        if (newPrice > 49)
-            newPrice = 50;
         newPrice = sellIn <= 0 ? price + 2 : price + 1;
         var newSellIn = sellIn - 1;
-        return { name: name, sellIn: newSellIn, price: newPrice };
+        return { name: name, sellIn: newSellIn, price: newPrice > 50 ? 50 : newPrice };
     };
     CarInsurance.prototype.updateSpecialFullCoverageProduct = function (_a) {
         var name = _a.name, sellIn = _a.sellIn, price = _a.price;
         var newPrice = price;
-        if (price > 49)
-            newPrice = 50;
-        else if (sellIn < 1)
+        if (sellIn < 1)
             newPrice = 0;
         else if (sellIn <= 5)
             newPrice = price + 3;
@@ -44,22 +40,20 @@ var CarInsurance = /** @class */ (function () {
         else
             newPrice = price + 1;
         var newSellIn = sellIn - 1;
-        return { name: name, sellIn: newSellIn, price: newPrice };
+        return { name: name, sellIn: newSellIn, price: newPrice > 50 ? 50 : newPrice };
     };
     CarInsurance.prototype.updateSuperSaleProduct = function (_a) {
         var name = _a.name, sellIn = _a.sellIn, price = _a.price;
         var newPrice = price;
-        if (newPrice > 49)
-            newPrice = 50;
-        newPrice = price >= 2 ? price - 2 : 0;
+        var degradeRate = sellIn < 0 ? 4 : 2;
+        newPrice = price >= 2 ? price - degradeRate : 0;
         return { name: name, sellIn: sellIn - 1, price: newPrice };
     };
     CarInsurance.prototype.updateNormalProduct = function (_a) {
         var name = _a.name, sellIn = _a.sellIn, price = _a.price;
         var newPrice = price;
-        if (newPrice > 49)
-            newPrice = 50;
-        newPrice = price >= 1 ? price - 1 : 0;
+        var degradeRate = sellIn < 0 ? 2 : 1;
+        newPrice = price >= 1 ? price - degradeRate : 0;
         return { name: name, sellIn: sellIn - 1, price: newPrice };
     };
     CarInsurance.prototype.updatePrice = function () {

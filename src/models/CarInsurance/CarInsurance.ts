@@ -22,31 +22,32 @@ export class CarInsurance {
   }
   private updateFullCoverageProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
-    if (newPrice > 49) newPrice = 50
     newPrice = sellIn <= 0 ? price + 2 : price + 1
     const newSellIn = sellIn - 1
-    return { name, sellIn: newSellIn, price: newPrice }
+    return { name, sellIn: newSellIn, price: newPrice > 50 ? 50 : newPrice }
   }
   private updateSpecialFullCoverageProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
-    if (price > 49) newPrice = 50
-    else if (sellIn < 1) newPrice = 0
+    if (sellIn < 1) newPrice = 0
     else if (sellIn <= 5) newPrice = price + 3
     else if (sellIn <= 10) newPrice = price + 2
     else newPrice = price + 1
     const newSellIn = sellIn - 1
-    return { name, sellIn: newSellIn, price: newPrice }
+    return { name, sellIn: newSellIn, price: newPrice > 50 ? 50 : newPrice }
   }
   private updateSuperSaleProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
-    if (newPrice > 49) newPrice = 50
-    newPrice = price >= 2 ? price - 2 : 0
+    const degradeRate = sellIn < 0 ? 4 : 2
+    newPrice = price >= 2 ? price - degradeRate : 0
     return { name, sellIn: sellIn - 1, price: newPrice }
   }
   private updateNormalProduct({ name, sellIn, price }: Product): Product {
     let newPrice = price
-    if (newPrice > 49) newPrice = 50
-    newPrice = price >= 1 ? price - 1 : 0
+
+    const degradeRate = sellIn < 0 ? 2 : 1
+
+    newPrice = price >= 1 ? price - degradeRate : 0
+
     return { name, sellIn: sellIn - 1, price: newPrice }
   }
 
