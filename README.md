@@ -4,10 +4,10 @@ This project my approach to refactor a legacy code into a testeable, object orie
 # Tech stack
 This project uses the following technologies.
 
--Package manager: Yarn
--Language: Typescript
--Testing framework: Jest
--Code quality assunrace: Eslint, Prettier, Husky.
+- Package manager: Yarn
+- Language: Typescript
+- Testing framework: Jest
+- Code quality assunrace: Eslint, Prettier, Husky.
 
 ## Avalable scripts
 - Clone this repo
