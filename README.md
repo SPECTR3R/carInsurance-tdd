@@ -3,6 +3,7 @@ This project my approach to refactor a legacy code into a testeable, object orie
 
 # Tech stack
 This project uses the following technologies.
+
 -Package manager: Yarn
 -Language: Typescript
 -Testing framework: Jest
